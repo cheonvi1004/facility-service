@@ -2,7 +2,6 @@
 
 7종 설비 제어 MQTT-svc-web 연동 서비스 (Spring Boot 3.3.x / Java 21 / Gradle)
 
-`26SBP002_시공및유지관리데이터연계표준-JSON방식통신규약` 4장(장비-미들웨어 MQTT) 및
 그간 논의한 svc 설계(상태-제어 토픽 비대칭, Cmd 라우팅, 요청-응답 상관관계, 정규화,
 화재/통화 긴급 우선순위, WebSocket 스냅샷/제어/통화 프로토콜)를 그대로 구현했습니다.
 
@@ -26,7 +25,7 @@ gradle bootRun
 ```
 
 `src/main/resources/application.yml`의 `facility.mqtt.*` 값을 실 서버/TEST 서버 정보로 맞춰주세요.
-(문서 1.4절: 실서버 192.168.201.240:1883, TEST 1.212.76.242:18831, ID/PW admin/admin1234)
+(실서버 xxx.xxx.xxx.xxx:1883, TEST xxx.xxx.xxx.xxx:18831, ID/PW admin/****)
 
 DB는 `spring.datasource.*`에 PostgreSQL 기준으로 잡아뒀습니다. 다른 DB를 쓰시면
 `build.gradle`의 `runtimeOnly 'org.postgresql:postgresql'`을 교체하고 URL을 바꿔주세요.
