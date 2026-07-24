@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: facility
+  namespace: collector
+  labels:
+    app: facility
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: facility
+  template:
+    metadata:
+      labels:
+        app: facility
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: facility
+          image: registry.spaasta.com/conpita/facility-service:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8081
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: facility-config
+            - secretRef:
+                name: facility-secret
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"

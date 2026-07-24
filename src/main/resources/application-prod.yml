@@ -1,0 +1,32 @@
+server:
+  port: ${SERVER_PORT:8081}
+
+spring:
+  application:
+    name: facility-service
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://192.168.105.150:5432/conpita}
+    username: ${DATABASE_USERNAME:conpita}
+    password: ${DATABASE_PASSWORD:master}
+    driver-class-name: ${DATABASE_DRIVER:org.postgresql.Driver}
+
+facility:
+  mqtt:
+    broker-url: ${MQTT_BROKER_URL:tcp://1.212.76.242:18831} #tcp://1.212.76.242:18831
+    client-id: facility-svc-${random.uuid}
+    username: ${MQTT_BROKER_USERNAME:admin}
+    password: ${MQTT_BROKER_PASSWORD:admin1234}
+    qos: ${MQTT_BROKER_QOS:0}
+    connection-timeout-seconds: ${MQTT_BROKER_CONN_TIMEOUT_SEC:10}
+    keep-alive-interval-seconds: ${MQTT_BROKER_KEEP_ALIVE_INTERVAL_SEC:60}
+    automatic-reconnect: ${MQTT_BROKER_AUTO_RECONNECT:true}
+  command:
+    default-timeout-seconds: 10
+  call:
+    access-timeout-seconds: 30
+  status:
+    history-save-enabled: ${FACILITY_STATUS_HISTORY_SAVE_ENABLED:false}
+
+logging:
+  level:
+    root: ${LOGGING_LEVEL:info}
